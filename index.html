@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alphatrack — Gestion de Flotte Intelligente | Alpha Systems</title>
-  <meta name="description" content="Alphatrack est le service de fleet tracking enterprise d'Alpha Systems. Géolocalisation temps réel, analyse comportementale conducteurs." />
+  <title>Alphatrack — GPS & Gestion de Flotte | Alpha Systems</title>
+  <meta name="description" content="Alphatrack par Alpha Systems : suivi GPS temps réel, géofencing, coupure moteur à distance. Installation gratuite. 1 an d'abonnement offert. Abidjan, Côte d'Ivoire." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet" />
   <style>
@@ -30,13 +30,12 @@
       --radius-lg: 16px;
       --shadow-sm: 0 2px 8px rgba(13,31,53,0.08);
       --shadow-md: 0 8px 32px rgba(13,31,53,0.12);
-      --shadow-lg: 0 20px 60px rgba(13,31,53,0.18);
     }
 
     html { scroll-behavior: smooth; }
     body { font-family: var(--font); color: var(--gray-800); background: var(--white); line-height: 1.6; }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(13,31,53,0.97); backdrop-filter: blur(12px);
@@ -47,7 +46,6 @@
       display: flex; align-items: center; justify-content: space-between; height: 68px;
     }
     .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
-    .nav-logo svg { flex-shrink: 0; }
     .nav-brand { display: flex; flex-direction: column; line-height: 1.1; }
     .nav-brand-main { font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: 0.02em; }
     .nav-brand-sub { font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.5); letter-spacing: 0.12em; text-transform: uppercase; }
@@ -55,13 +53,13 @@
     .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
     .nav-cta {
-      background: var(--orange); color: var(--white); padding: 9px 22px;
+      background: var(--orange); color: var(--white) !important; padding: 9px 22px;
       border-radius: var(--radius); font-size: 14px; font-weight: 600;
       text-decoration: none; transition: background 0.2s;
     }
-    .nav-cta:hover { background: var(--orange-light); color: var(--white); }
+    .nav-cta:hover { background: var(--orange-light) !important; }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
       min-height: 100vh; background: var(--navy-dark);
       display: flex; align-items: center;
@@ -69,16 +67,15 @@
     }
     .hero-bg-pattern {
       position: absolute; inset: 0; opacity: 0.04;
-      background-image: repeating-linear-gradient(
-        90deg, rgba(255,255,255,1) 0px, rgba(255,255,255,1) 1px, transparent 1px, transparent 80px
-      ), repeating-linear-gradient(
-        0deg, rgba(255,255,255,1) 0px, rgba(255,255,255,1) 1px, transparent 1px, transparent 80px
-      );
+      background-image:
+        repeating-linear-gradient(90deg, rgba(255,255,255,1) 0px, rgba(255,255,255,1) 1px, transparent 1px, transparent 80px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,1) 0px, rgba(255,255,255,1) 1px, transparent 1px, transparent 80px);
     }
     .hero-accent {
       position: absolute; right: -100px; top: 50%; transform: translateY(-50%);
       width: 700px; height: 700px;
       background: radial-gradient(ellipse at center, rgba(240,78,0,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
     .hero-inner {
       max-width: 1200px; margin: 0 auto; padding: 6rem 2rem;
@@ -92,15 +89,15 @@
       font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
       margin-bottom: 1.5rem;
     }
-    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--orange); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--orange); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
     .hero h1 {
-      font-size: clamp(36px, 5vw, 58px); font-weight: 800; color: var(--white);
+      font-size: clamp(34px, 5vw, 56px); font-weight: 800; color: var(--white);
       line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem;
     }
     .hero h1 span { color: var(--orange); }
     .hero p {
-      font-size: 18px; color: rgba(255,255,255,0.65); font-weight: 300;
+      font-size: 17px; color: rgba(255,255,255,0.65); font-weight: 300;
       line-height: 1.7; margin-bottom: 2.5rem; max-width: 480px;
     }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -118,73 +115,115 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
-    .hero-stats {
-      display: flex; gap: 2.5rem; margin-top: 3rem;
-      padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .hero-stat-num { font-size: 28px; font-weight: 800; color: var(--white); }
-    .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
 
-    /* Dashboard mockup */
-    .hero-visual { position: relative; }
-    .dash-card {
-      background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-lg); overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    /* Offre badge hero */
+    .hero-promo {
+      margin-top: 2rem; padding: 14px 20px;
+      background: rgba(240,78,0,0.12); border: 1px solid rgba(240,78,0,0.3);
+      border-radius: var(--radius); display: inline-flex; align-items: center; gap: 12px;
     }
-    .dash-header {
-      background: var(--navy); padding: 12px 20px;
-      display: flex; align-items: center; gap: 8px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+    .hero-promo-icon { font-size: 22px; }
+    .hero-promo-text { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.4; }
+    .hero-promo-text strong { color: var(--orange); }
+
+    /* ── PHONE MOCKUP — fidèle brochure ── */
+    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .phone-frame {
+      width: 280px; flex-shrink: 0;
+      background: #fff; border-radius: 36px; overflow: hidden;
+      box-shadow: 0 0 0 8px #111, 0 0 0 10px #222, 0 40px 80px rgba(0,0,0,0.65);
+      display: flex; flex-direction: column;
     }
-    .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dash-title { color: rgba(255,255,255,0.5); font-size: 12px; margin-left: auto; }
-    .dash-body { padding: 20px; }
-    .dash-map-placeholder {
-      background: var(--navy-dark); border-radius: var(--radius); height: 180px;
+    /* Status bar Android */
+    .phone-status {
+      background: #fff; padding: 8px 16px 4px;
+      display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
+    }
+    .phone-status-time { font-size: 11px; font-weight: 700; color: #111; }
+    .phone-status-icons { display: flex; gap: 4px; align-items: center; }
+    .phone-status-icons svg { width: 13px; height: 13px; }
+    /* Map area — carte claire Google Maps comme dans la brochure */
+    .app-map {
+      height: 220px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #e8ecf0;
+    }
+    .app-map svg { width: 100%; height: 100%; display: block; }
+    /* Véhicule pin circulaire vert comme dans la brochure */
+    .vehicle-pin {
+      position: absolute; transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center; pointer-events: none;
+    }
+    .vehicle-pin-circle {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #2d8a4e; border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
       display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden; margin-bottom: 16px;
+      overflow: hidden;
     }
-    .map-grid-lines {
-      position: absolute; inset: 0; opacity: 0.15;
-      background-image:
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.3) 0, rgba(255,255,255,0.3) 1px, transparent 1px, transparent 40px),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.3) 0, rgba(255,255,255,0.3) 1px, transparent 1px, transparent 40px);
+    .vehicle-pin-circle svg { width: 22px; height: 22px; }
+    .vehicle-pin-pulse {
+      position: absolute; width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(45,138,78,0.25);
+      animation: pingout 2s ease-out infinite;
     }
-    .map-dot {
-      position: absolute; width: 10px; height: 10px;
-      background: var(--orange); border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(240,78,0,0.25);
+    @keyframes pingout { 0%{transform:scale(1);opacity:0.8} 100%{transform:scale(2.4);opacity:0} }
+    .vehicle-pin-plate {
+      background: #2d8a4e; color: white; font-size: 8px; font-weight: 700;
+      padding: 2px 8px; border-radius: 4px; margin-top: 4px; white-space: nowrap;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
     }
-    .map-dot::after {
-      content:''; position:absolute; inset:-8px; border-radius:50%;
-      border: 1px solid rgba(240,78,0,0.4);
-      animation: sonar 2s infinite;
+    /* Panneau de menu bas — 16 boutons colorés comme dans la brochure */
+    .app-menu-panel {
+      background: white; flex: 1;
+      border-radius: 18px 18px 0 0;
+      padding: 14px 12px 8px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
     }
-    @keyframes sonar { 0%{transform:scale(0.5);opacity:1} 100%{transform:scale(2.5);opacity:0} }
-    .map-vehicle-label {
-      position: absolute; background: rgba(240,78,0,0.9); color: white;
-      font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 4px;
-      white-space: nowrap;
+    .app-menu-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 6px;
+      margin-bottom: 10px;
     }
-    .dash-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-    .dash-metric {
-      background: rgba(255,255,255,0.04); border-radius: var(--radius);
-      padding: 10px 12px; border: 1px solid rgba(255,255,255,0.06);
+    .app-menu-item {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
     }
-    .dash-metric-val { font-size: 20px; font-weight: 700; color: var(--white); }
-    .dash-metric-lbl { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-    .dash-metric-trend { font-size: 10px; color: #4ADE80; margin-top: 4px; }
-    .dash-alert {
-      margin-top: 12px; background: rgba(240,78,0,0.12); border: 1px solid rgba(240,78,0,0.25);
-      border-radius: var(--radius); padding: 10px 14px;
-      display: flex; align-items: center; gap: 10px;
+    .app-menu-icon {
+      width: 46px; height: 46px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .dash-alert-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
-    .dash-alert-text { font-size: 12px; color: rgba(255,255,255,0.75); }
-    .dash-alert-time { font-size: 11px; color: rgba(255,255,255,0.35); margin-left: auto; white-space: nowrap; }
+    .app-menu-icon svg { width: 22px; height: 22px; }
+    .app-menu-lbl { font-size: 8px; color: #374151; text-align: center; font-weight: 500; line-height: 1.2; }
+    .app-menu-shrink {
+      text-align: center; color: #2563EB; font-size: 12px; font-weight: 600;
+      padding: 6px 0; border-top: 1px solid #F3F4F6;
+    }
+    /* Android nav bar */
+    .android-nav {
+      background: white; padding: 8px 0 10px;
+      display: flex; justify-content: space-around; align-items: center; flex-shrink: 0;
+      border-top: 1px solid #f0f0f0;
+    }
+    .android-nav-btn {
+      width: 22px; height: 22px; border-radius: 3px;
+      border: 2px solid #555; display: flex; align-items: center; justify-content: center;
+    }
+    .alert-card-icon { width: 28px; height: 28px; background: var(--orange); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .alert-card-icon svg { width: 15px; height: 15px; }
+    .alert-card-title { font-size: 11px; font-weight: 700; color: #92400E; }
+    .alert-card-desc { font-size: 10px; color: #B45309; margin-top: 2px; line-height: 1.4; }
+    .alert-card-time { font-size: 9px; color: #D97706; margin-top: 3px; }
+    /* Bottom nav */
+    .app-bottom-nav {
+      background: white; border-top: 1px solid #E5E7EB;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      padding: 8px 0 12px; flex-shrink: 0;
+    }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .nav-item svg { width: 20px; height: 20px; }
+    .nav-item-lbl { font-size: 9px; font-weight: 500; color: #9CA3AF; }
+    .nav-item.active svg { color: var(--orange); }
+    .nav-item.active .nav-item-lbl { color: var(--orange); font-weight: 700; }
 
-    /* SECTIONS COMMON */
+    /* ── SECTIONS COMMUNES ── */
     section { padding: 6rem 0; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     .section-label {
@@ -192,18 +231,17 @@
       color: var(--orange); margin-bottom: 0.75rem;
     }
     .section-title {
-      font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--navy);
+      font-size: clamp(26px, 4vw, 40px); font-weight: 800; color: var(--navy);
       line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem;
     }
     .section-sub {
-      font-size: 17px; color: var(--gray-600); font-weight: 300; line-height: 1.7;
-      max-width: 600px;
+      font-size: 17px; color: var(--gray-600); font-weight: 300; line-height: 1.7; max-width: 600px;
     }
-    .section-header { margin-bottom: 4rem; }
+    .section-header { margin-bottom: 3.5rem; }
     .section-header.center { text-align: center; }
     .section-header.center .section-sub { margin: 0 auto; }
 
-    /* FEATURES */
+    /* ── FEATURES ── */
     .features { background: var(--gray-50); }
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .feature-card {
@@ -218,28 +256,113 @@
       margin-bottom: 1.25rem;
     }
     .feature-icon svg { width: 26px; height: 26px; }
-    .feature-card h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
     .feature-card p { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+    .feature-tag {
+      display: inline-block; margin-top: 0.75rem;
+      background: var(--orange-pale); color: var(--orange);
+      font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px;
+    }
 
-    /* USE CASES */
-    .usecases { background: var(--white); }
+    /* ── TARIFS ── */
+    .pricing { background: var(--white); }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .pricing-box {
+      border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .pricing-box-header { background: var(--navy); padding: 1.5rem 2rem; }
+    .pricing-box-header h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .pricing-box-header p { font-size: 14px; color: rgba(255,255,255,0.55); }
+    .pricing-box-header.orange { background: var(--orange); }
+    .pricing-box-body { padding: 1.75rem 2rem; }
+    .pricing-line {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 0.85rem 0; border-bottom: 1px solid var(--gray-100); gap: 1rem;
+    }
+    .pricing-line:last-child { border-bottom: none; }
+    .pricing-line-label { font-size: 14px; color: var(--gray-600); flex: 1; }
+    .pricing-line-label small { display: block; font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+    .pricing-line-price { font-size: 15px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+    .pricing-line-price.free { color: #16A34A; }
+    .pricing-line-price.option { color: var(--orange); font-size: 13px; }
+    .pricing-promo {
+      margin: 1.25rem 0 0; background: #ECFDF5; border: 1px solid #86EFAC;
+      border-radius: var(--radius); padding: 12px 16px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .pricing-promo-dot { width: 8px; height: 8px; background: #16A34A; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+    .pricing-promo-text { font-size: 13px; color: #15803D; line-height: 1.5; }
+    .pricing-promo-text strong { font-weight: 700; }
+    .abonnement-card {
+      background: var(--navy); border-radius: var(--radius-lg); padding: 2rem;
+      color: white; position: relative; overflow: hidden;
+    }
+    .abonnement-card::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.05;
+      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 20px);
+    }
+    .abonnement-inner { position: relative; z-index: 1; }
+    .abonnement-badge {
+      display: inline-block; background: var(--orange); color: white;
+      font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px;
+      margin-bottom: 1.25rem; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .abonnement-price { margin-bottom: 1.5rem; }
+    .abonnement-price-main { font-size: 42px; font-weight: 800; color: white; line-height: 1; }
+    .abonnement-price-main sup { font-size: 20px; font-weight: 600; vertical-align: super; }
+    .abonnement-price-main sub { font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.55); }
+    .abonnement-price-note { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+    .abonnement-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
+    .abonnement-features li {
+      display: flex; gap: 10px; align-items: center;
+      font-size: 14px; color: rgba(255,255,255,0.8);
+    }
+    .abonnement-features li::before {
+      content: ''; width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(240,78,0,0.25); border: 1.5px solid var(--orange);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F04E00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 10px; background-position: center; background-repeat: no-repeat;
+    }
+    .abonnement-annuel {
+      background: rgba(255,255,255,0.07); border-radius: var(--radius); padding: 12px 16px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .abonnement-annuel-label { font-size: 13px; color: rgba(255,255,255,0.55); }
+    .abonnement-annuel-price { font-size: 15px; font-weight: 700; color: white; }
+    .abonnement-annuel-old { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: line-through; margin-right: 6px; }
+    .garanties {
+      margin-top: 2rem; background: var(--gray-50); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 1.75rem 2rem;
+    }
+    .garanties h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; }
+    .garantie-list { display: flex; flex-direction: column; gap: 0.8rem; }
+    .garantie-item { display: flex; gap: 12px; align-items: flex-start; }
+    .garantie-icon {
+      width: 34px; height: 34px; border-radius: var(--radius); flex-shrink: 0;
+      background: var(--navy); display: flex; align-items: center; justify-content: center;
+    }
+    .garantie-icon svg { width: 16px; height: 16px; }
+    .garantie-item strong { font-size: 13px; color: var(--navy); display: block; }
+    .garantie-item span { font-size: 12px; color: var(--gray-600); }
+
+    /* ── USE CASES ── */
+    .usecases { background: var(--gray-50); }
     .uc-tabs { display: flex; gap: 0.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
     .uc-tab {
       padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 600;
       cursor: pointer; transition: all 0.2s; border: 1px solid var(--gray-200);
-      background: var(--white); color: var(--gray-600);
+      background: var(--white); color: var(--gray-600); font-family: var(--font);
     }
     .uc-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
-    .uc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
     .uc-panel { display: none; }
     .uc-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
     .uc-items { display: flex; flex-direction: column; gap: 1rem; }
     .uc-item {
       display: flex; gap: 1rem; align-items: flex-start;
-      padding: 1rem 1.25rem; border-radius: var(--radius); border: 1px solid transparent;
-      transition: all 0.2s; cursor: default;
+      padding: 1rem 1.25rem; border-radius: var(--radius); border: 1px solid transparent; transition: all 0.2s;
     }
-    .uc-item:hover { background: var(--gray-50); border-color: var(--gray-200); }
+    .uc-item:hover { background: var(--white); border-color: var(--gray-200); }
     .uc-item-icon {
       width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--radius);
       background: var(--navy); display: flex; align-items: center; justify-content: center;
@@ -247,64 +370,29 @@
     .uc-item-icon svg { width: 18px; height: 18px; }
     .uc-item h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
     .uc-item p { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
-    .uc-visual {
-      background: var(--gray-50); border-radius: var(--radius-lg);
-      border: 1px solid var(--gray-200); padding: 2rem;
-      display: flex; flex-direction: column; gap: 1rem;
-    }
+    .uc-visual { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--gray-200); padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
     .uc-visual-label { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; }
     .uc-bar-row { display: flex; align-items: center; gap: 12px; }
-    .uc-bar-label { font-size: 12px; color: var(--gray-600); min-width: 80px; }
+    .uc-bar-label { font-size: 12px; color: var(--gray-600); min-width: 90px; }
     .uc-bar-track { flex: 1; background: var(--gray-200); border-radius: 4px; height: 8px; overflow: hidden; }
     .uc-bar-fill { height: 100%; border-radius: 4px; background: var(--navy); }
     .uc-bar-fill.orange { background: var(--orange); }
-    .uc-bar-val { font-size: 12px; font-weight: 600; color: var(--navy); min-width: 36px; text-align: right; }
+    .uc-bar-val { font-size: 12px; font-weight: 600; color: var(--navy); min-width: 48px; text-align: right; }
 
-    /* TESTIMONIALS */
-    .testimonials { background: var(--navy-dark); }
-    .testimonials .section-title { color: var(--white); }
-    .testimonials .section-label { color: var(--orange); }
-    .testimonials .section-sub { color: rgba(255,255,255,0.55); }
-    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .testi-card {
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-lg); padding: 2rem;
-    }
-    .testi-stars { color: var(--orange); font-size: 14px; margin-bottom: 1rem; }
-    .testi-text { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; font-weight: 300; margin-bottom: 1.5rem; font-style: italic; }
-    .testi-author { display: flex; align-items: center; gap: 12px; }
-    .testi-avatar {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: var(--orange); display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 700; color: var(--white);
-    }
-    .testi-name { font-size: 14px; font-weight: 600; color: var(--white); }
-    .testi-role { font-size: 12px; color: rgba(255,255,255,0.4); }
 
-    /* ABOUT */
+
+    /* ── ABOUT ── */
     .about { background: var(--white); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .about-values { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2.5rem; }
     .about-value { display: flex; gap: 1rem; align-items: flex-start; }
-    .about-value-num {
-      width: 36px; height: 36px; flex-shrink: 0; border-radius: var(--radius);
-      background: var(--orange); color: var(--white);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 800;
-    }
+    .about-value-num { width: 36px; height: 36px; flex-shrink: 0; border-radius: var(--radius); background: var(--orange); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; }
     .about-value h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
     .about-value p { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
-    .about-visual {
-      background: var(--navy); border-radius: var(--radius-lg);
-      padding: 3rem; color: var(--white); position: relative; overflow: hidden;
-    }
-    .about-visual-bg {
-      position: absolute; inset: 0; opacity: 0.05;
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 20px);
-    }
+    .about-visual { background: var(--navy); border-radius: var(--radius-lg); padding: 3rem; color: var(--white); position: relative; overflow: hidden; }
+    .about-visual-bg { position: absolute; inset: 0; opacity: 0.05; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 20px); }
     .about-visual-content { position: relative; z-index: 1; }
-    .about-logo-big { margin-bottom: 2rem; }
-    .about-tagline { font-size: 22px; font-weight: 700; line-height: 1.3; margin-bottom: 1rem; }
+    .about-tagline { font-size: 22px; font-weight: 700; line-height: 1.3; margin-bottom: 1rem; margin-top: 1.5rem; }
     .about-tagline span { color: var(--orange); }
     .about-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; font-weight: 300; }
     .about-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
@@ -313,75 +401,52 @@
     .about-num-val span { color: var(--orange); }
     .about-num-lbl { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.06em; }
 
-    /* CONTACT */
+    /* ── CONTACT ── */
     .contact { background: var(--gray-50); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-    .contact-info { padding-top: 0.5rem; }
-    .contact-info .section-title { font-size: 32px; }
     .contact-info p { color: var(--gray-600); margin: 1.25rem 0 2rem; font-size: 16px; line-height: 1.7; }
     .contact-points { display: flex; flex-direction: column; gap: 1.25rem; }
     .contact-point { display: flex; align-items: flex-start; gap: 1rem; }
-    .contact-point-icon {
-      width: 42px; height: 42px; flex-shrink: 0; border-radius: var(--radius);
-      background: var(--navy); display: flex; align-items: center; justify-content: center;
-    }
+    .contact-point-icon { width: 42px; height: 42px; flex-shrink: 0; border-radius: var(--radius); background: var(--navy); display: flex; align-items: center; justify-content: center; }
     .contact-point-icon svg { width: 20px; height: 20px; }
-    .contact-point strong { display: block; font-size: 14px; font-weight: 700; color: var(--navy); }
-    .contact-point span { font-size: 14px; color: var(--gray-600); }
-    .contact-form {
-      background: var(--white); border: 1px solid var(--gray-200);
-      border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-sm);
-    }
+    .contact-point strong { display: block; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .contact-point span { font-size: 14px; color: var(--gray-600); line-height: 1.5; display: block; }
+    .contact-point a { color: var(--orange); text-decoration: none; }
+    .contact-point a:hover { text-decoration: underline; }
+    .contact-form { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-sm); }
     .contact-form h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 1.75rem; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-group { margin-bottom: 1.25rem; }
     .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--gray-600); margin-bottom: 6px; }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 11px 14px; border: 1px solid var(--gray-200); border-radius: var(--radius);
-      font-family: var(--font); font-size: 14px; color: var(--gray-800);
-      background: var(--white); transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      border-color: var(--navy); box-shadow: 0 0 0 3px rgba(13,31,53,0.08);
-    }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit {
-      width: 100%; background: var(--orange); color: var(--white);
-      border: none; padding: 14px; border-radius: var(--radius);
-      font-family: var(--font); font-size: 15px; font-weight: 600; cursor: pointer;
-      transition: background 0.2s; margin-top: 0.5rem;
-    }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--gray-200); border-radius: var(--radius); font-family: var(--font); font-size: 14px; color: var(--gray-800); background: var(--white); transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(13,31,53,0.08); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit { width: 100%; background: var(--orange); color: var(--white); border: none; padding: 14px; border-radius: var(--radius); font-family: var(--font); font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 0.25rem; }
     .form-submit:hover { background: var(--orange-light); }
     .form-notice { font-size: 12px; color: var(--gray-400); text-align: center; margin-top: 0.75rem; }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer { background: var(--navy-dark); border-top: 1px solid rgba(255,255,255,0.07); }
-    .footer-inner {
-      max-width: 1200px; margin: 0 auto; padding: 4rem 2rem 2rem;
-    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem 2rem; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
     .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 1rem; line-height: 1.7; font-weight: 300; max-width: 280px; }
     .footer-col h4 { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
     .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
     .footer-col ul li a:hover { color: rgba(255,255,255,0.85); }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem;
-      display: flex; justify-content: space-between; align-items: center;
-    }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
     .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .footer-rcm { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 0.4rem; }
 
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .hero-inner, .about-grid, .contact-grid, .uc-panel.active { grid-template-columns: 1fr; gap: 2.5rem; }
-      .features-grid, .testi-grid { grid-template-columns: 1fr 1fr; }
+      .hero-inner, .about-grid, .contact-grid, .uc-panel.active, .pricing-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .hero h1 { font-size: 38px; }
       .nav-links { display: none; }
     }
     @media (max-width: 600px) {
-      .features-grid, .testi-grid, .footer-grid, .form-row { grid-template-columns: 1fr; }
-      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+      .features-grid, .footer-grid, .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -391,11 +456,7 @@
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="36" height="36" rx="6" fill="#F04E00"/>
-        <polygon points="18,5 30,28 6,28" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
-        <polygon points="18,13 24,22 12,22" fill="white"/>
-      </svg>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="6" fill="#F04E00"/><polygon points="18,5 30,28 6,28" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><polygon points="18,13 24,22 12,22" fill="white"/></svg>
       <div class="nav-brand">
         <span class="nav-brand-main">Alphatrack</span>
         <span class="nav-brand-sub">by Alpha Systems</span>
@@ -403,9 +464,10 @@
     </a>
     <div class="nav-links">
       <a href="#features">Fonctionnalités</a>
+      <a href="#pricing">Tarifs</a>
       <a href="#usecases">Cas d'usage</a>
       <a href="#about">À propos</a>
-      <a href="#contact" class="nav-cta">Demander une démo</a>
+      <a href="#contact" class="nav-cta">Nous contacter</a>
     </div>
   </div>
 </nav>
@@ -415,33 +477,249 @@
   <div class="hero-bg-pattern"></div>
   <div class="hero-accent"></div>
   <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge"></div>
-      <h1>Maîtrisez votre flotte.<br/><span>En temps réel.</span></h1>
-      <p>Alphatrack est le service enterprise de gestion de flotte qui combine géolocalisation avancée, et monitoring de l'activité des conducteurs en une solution unifiée.</p>
+    <div>
+      <div class="hero-badge">Suivi GPS & Sécurité véhicules</div>
+      <h1>Vos véhicules,<br/>sous contrôle <span>en temps réel.</span></h1>
+      <p>Alphatrack combine géolocalisation GPS, géofencing avancé et coupure moteur à distance pour sécuriser et optimiser chaque véhicule de votre flotte — particuliers et entreprises.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">
-          Demander une démo
+          Nous contacter
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#features" class="btn-secondary">Découvrir le produit</a>
+        <a href="#pricing" class="btn-secondary">Voir les tarifs</a>
       </div>
-      <div class="hero-stats">
-        <div>
-          <div class="hero-stat-num">80+</div>
-          <div class="hero-stat-label">Cas d'usage</div>
-        </div>
-        <div>
-          <div class="hero-stat-num">99.9%</div>
-          <div class="hero-stat-label">Uptime garanti</div>
-        </div>
-        <div>
-          <div class="hero-stat-num">24/7</div>
-          <div class="hero-stat-label">Monitoring actif</div>
+      <div class="hero-promo">
+        <span class="hero-promo-icon">🎁</span>
+        <div class="hero-promo-text">
+          <strong>1 an d'abonnement Premium offert</strong> à l'achat et l'installation de votre tracker GPS.<br/>
+          <span style="font-size:12px;opacity:0.7">Installation gratuite incluse · Renouvelable à 100 000 FCFA/an</span>
         </div>
       </div>
     </div>
+    <div class="hero-visual">
+      <div class="phone-frame">
 
+        <!-- Status bar Android (fond blanc comme dans la brochure) -->
+        <div class="phone-status">
+          <span class="phone-status-time">9:18</span>
+          <div class="phone-status-icons">
+            <!-- location arrow -->
+            <svg viewBox="0 0 24 24" fill="#111" width="12" height="12"><path d="M12 2L19 21l-7-3-7 3z"/></svg>
+            <!-- signal bars ×2 -->
+            <svg viewBox="0 0 24 24" fill="#111" width="13" height="13"><rect x="1" y="10" width="4" height="10" rx="1"/><rect x="7" y="6" width="4" height="14" rx="1"/><rect x="13" y="2" width="4" height="18" rx="1"/><rect x="19" y="6" width="4" height="14" rx="1" opacity="0.3"/></svg>
+            <svg viewBox="0 0 24 24" fill="#111" width="13" height="13"><rect x="1" y="10" width="4" height="10" rx="1"/><rect x="7" y="6" width="4" height="14" rx="1"/><rect x="13" y="2" width="4" height="18" rx="1"/><rect x="19" y="6" width="4" height="14" rx="1" opacity="0.3"/></svg>
+            <!-- wifi -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" width="13" height="13"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="#111" stroke="none"/></svg>
+            <!-- battery green -->
+            <svg viewBox="0 0 28 14" fill="none" width="24" height="13">
+              <rect x="0.5" y="0.5" width="24" height="13" rx="3" stroke="#111" stroke-width="1"/>
+              <rect x="2" y="2" width="20" height="10" rx="2" fill="#4ADE80"/>
+              <rect x="25" y="4" width="3" height="6" rx="1.5" fill="#111" opacity="0.4"/>
+            </svg>
+            <circle cx="4" cy="4" r="3.5" fill="#4ADE80" style="display:inline-block"/>
+          </div>
+        </div>
+
+        <!-- Carte Google Maps claire — avec noms de rues -->
+        <div class="app-map">
+          <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <!-- Fond carte clair -->
+            <rect width="280" height="220" fill="#e8eceb"/>
+            <!-- Eau / rivières -->
+            <path d="M0 80 Q40 70 80 85 Q120 100 160 80 Q200 60 240 75 Q260 82 280 78 L280 110 Q260 114 240 105 Q200 90 160 110 Q120 130 80 115 Q40 100 0 110 Z" fill="#b3d4e8" opacity="0.7"/>
+            <!-- Grandes zones vertes -->
+            <rect x="160" y="0" width="60" height="55" rx="2" fill="#c8ddb0" opacity="0.8"/>
+            <rect x="0" y="0" width="70" height="60" rx="2" fill="#d4e8c2" opacity="0.7"/>
+            <!-- Blocs bâtiments clairs -->
+            <rect x="8" y="8" width="28" height="18" rx="1" fill="#d0d8c8"/>
+            <rect x="40" y="6" width="22" height="20" rx="1" fill="#d0d8c8"/>
+            <rect x="10" y="32" width="20" height="16" rx="1" fill="#d0d8c8"/>
+            <rect x="36" y="30" width="24" height="18" rx="1" fill="#d0d8c8"/>
+            <rect x="172" y="6" width="34" height="22" rx="1" fill="#d0d8c8"/>
+            <rect x="210" y="4" width="28" height="26" rx="1" fill="#d0d8c8"/>
+            <rect x="176" y="32" width="26" height="18" rx="1" fill="#d0d8c8"/>
+            <rect x="206" y="34" width="20" height="16" rx="1" fill="#d0d8c8"/>
+            <rect x="10" y="145" width="35" height="22" rx="1" fill="#d0d8c8"/>
+            <rect x="50" y="148" width="25" height="20" rx="1" fill="#d0d8c8"/>
+            <rect x="180" y="150" width="40" height="25" rx="1" fill="#d0d8c8"/>
+            <rect x="225" y="152" width="30" height="22" rx="1" fill="#d0d8c8"/>
+            <!-- Routes orange (autoroute) -->
+            <path d="M0 95 L280 95" stroke="#f5a623" stroke-width="7"/>
+            <path d="M0 95 L280 95" stroke="#f7bc55" stroke-width="5"/>
+            <!-- Routes principales blanches -->
+            <path d="M140 0 L140 220" stroke="white" stroke-width="9"/>
+            <path d="M0 65 L130 65" stroke="white" stroke-width="6"/>
+            <path d="M150 65 L280 65" stroke="white" stroke-width="6"/>
+            <path d="M0 148 L280 148" stroke="white" stroke-width="6"/>
+            <path d="M75 0 L75 85" stroke="white" stroke-width="6"/>
+            <path d="M75 105 L75 220" stroke="white" stroke-width="6"/>
+            <path d="M205 0 L205 85" stroke="white" stroke-width="6"/>
+            <path d="M205 105 L205 220" stroke="white" stroke-width="6"/>
+            <!-- Routes secondaires -->
+            <path d="M30 65 L30 95" stroke="white" stroke-width="3.5"/>
+            <path d="M52 65 L52 95" stroke="white" stroke-width="3.5"/>
+            <path d="M8 80 L75 80" stroke="white" stroke-width="3.5"/>
+            <path d="M150 125 L205 125" stroke="white" stroke-width="3.5"/>
+            <path d="M170 95 L170 148" stroke="white" stroke-width="3.5"/>
+            <path d="M190 95 L190 148" stroke="white" stroke-width="3.5"/>
+            <!-- Noms de rues -->
+            <text x="100" y="90" font-size="6" fill="#888" font-family="sans-serif" text-anchor="middle">Lishui Rd</text>
+            <text x="200" y="62" font-size="6" fill="#888" font-family="sans-serif" text-anchor="middle">Xueyuan Blvd</text>
+            <text x="140" y="30" font-size="6" fill="#888" font-family="sans-serif" text-anchor="middle" transform="rotate(90,140,30)">Liuxian Blvd</text>
+            <!-- Panneau route orange S301 -->
+            <rect x="92" y="97" width="24" height="10" rx="2" fill="#e07820"/>
+            <text x="104" y="105" font-size="6.5" fill="white" font-family="sans-serif" font-weight="bold" text-anchor="middle">S301</text>
+            <!-- Rond-point -->
+            <circle cx="140" cy="95" r="10" fill="white" stroke="#ddd" stroke-width="1"/>
+            <circle cx="140" cy="95" r="5" fill="#e8eceb"/>
+            <!-- Icône véhicule vert cerclé — comme dans la brochure -->
+            <circle cx="140" cy="68" r="14" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+            <!-- camionnette blanche simplifiée -->
+            <rect x="130" y="62" width="20" height="13" rx="2" fill="white" opacity="0.9"/>
+            <rect x="130" y="62" width="13" height="9" rx="1" fill="white"/>
+            <rect x="143" y="64" width="7" height="7" rx="1" fill="white" opacity="0.7"/>
+            <circle cx="133" cy="75" r="2.5" fill="#2d8a4e"/>
+            <circle cx="145" cy="75" r="2.5" fill="#2d8a4e"/>
+            <!-- Plaque verte sous le véhicule -->
+            <rect x="116" y="84" width="48" height="11" rx="2" fill="#2d8a4e"/>
+            <text x="140" y="92" font-size="6" fill="white" font-family="monospace" font-weight="bold" text-anchor="middle">粤C65***</text>
+            <!-- Zoom +/- à droite -->
+            <rect x="258" y="10" width="18" height="18" rx="3" fill="white" stroke="#ddd" stroke-width="1"/>
+            <text x="267" y="23" font-size="14" fill="#333" font-family="sans-serif" text-anchor="middle">+</text>
+            <rect x="258" y="32" width="18" height="18" rx="3" fill="white" stroke="#ddd" stroke-width="1"/>
+            <rect x="261" y="40" width="12" height="2" rx="1" fill="#333"/>
+            <!-- Icône layers haut gauche -->
+            <rect x="4" y="10" width="22" height="22" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
+            <rect x="8" y="14" width="14" height="2" rx="1" fill="#555"/>
+            <rect x="8" y="18" width="14" height="2" rx="1" fill="#555"/>
+            <rect x="8" y="22" width="10" height="2" rx="1" fill="#555"/>
+          </svg>
+        </div>
+
+        <!-- Panneau blanc de menu — 16 boutons colorés comme dans la brochure -->
+        <div class="app-menu-panel">
+          <div class="app-menu-grid">
+
+            <!-- Row 1 -->
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#34A853">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <span class="app-menu-lbl">Position</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#9C27B0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><polyline points="9 12 12 15 22 5"/></svg>
+              </div>
+              <span class="app-menu-lbl">Replay</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#2196F3">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+              </div>
+              <span class="app-menu-lbl">Device</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#FF9800">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <span class="app-menu-lbl">My</span>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#3F51B5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <span class="app-menu-lbl">Monitoring</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#E53935">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+              <span class="app-menu-lbl">Report</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#00BCD4">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+              </div>
+              <span class="app-menu-lbl">Set</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#F44336">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <span class="app-menu-lbl">Alarm</span>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#009688">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <span class="app-menu-lbl">Set fence</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#E91E8C">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <span class="app-menu-lbl">Device icon</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#4CAF50">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+              </div>
+              <span class="app-menu-lbl">Locate info</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#FFC107">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <span class="app-menu-lbl">Device info</span>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#4CAF50">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </div>
+              <span class="app-menu-lbl">Recorder</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#FF5722">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+              </div>
+              <span class="app-menu-lbl">Measure</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#607D8B">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+              </div>
+              <span class="app-menu-lbl">Sim card</span>
+            </div>
+            <div class="app-menu-item">
+              <div class="app-menu-icon" style="background:#F6B800">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <span class="app-menu-lbl">Vip</span>
+            </div>
+
+          </div>
+          <!-- Bouton Shrink bleu -->
+          <div class="app-menu-shrink">Shrink</div>
+        </div>
+
+        <!-- Barre de navigation Android -->
+        <div class="android-nav">
+          <!-- carré -->
+          <div style="width:20px;height:20px;border:2px solid #555;border-radius:3px"></div>
+          <!-- cercle -->
+          <div style="width:20px;height:20px;border:2px solid #555;border-radius:50%"></div>
+          <!-- triangle -->
+          <div style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:18px solid #555"></div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -451,34 +729,189 @@
   <div class="container">
     <div class="section-header center">
       <div class="section-label">Fonctionnalités</div>
-      <h2 class="section-title">Tout ce dont votre flotte a besoin</h2>
-      <p class="section-sub">Un Service complet, conçu pour les exigences enterprise — sécurité, conformité et performance opérationnelle.</p>
+      <h2 class="section-title">Tout pour sécuriser et gérer votre flotte</h2>
+      <p class="section-sub">Alpha Systems combine innovation technologique et expertise locale pour offrir des solutions fiables de suivi, surveillance et protection de vos véhicules.</p>
     </div>
     <div class="features-grid">
 
       <div class="feature-card">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
-        <h3>Géolocalisation temps réel</h3>
-        <p>Suivi GPS précis à la seconde, avec historique de trajet complet, zones d'alerte géolocalisées et cartographie avancée.</p>
+        <h3>Suivi GPS temps réel</h3>
+        <p>Visualisez la position exacte de tous vos véhicules en temps réel via l'application mobile. Historique complet des trajets, vitesses et arrêts.</p>
+        <span class="feature-tag">Application mobile</span>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         </div>
-        <h3>Monitoring conducteur</h3>
-        <p>Analyse comportementale : freinage brusque, excès de vitesse, distraction — avec rapports individuels et formation ciblée.</p>
+        <h3>Géofencing (Géorepérage)</h3>
+        <p>Définissez des zones géographiques autorisées. Recevez une alerte immédiate dès qu'un véhicule entre ou sort d'une zone délimitée.</p>
+        <span class="feature-tag">Alertes instantanées</span>
       </div>
-
 
       <div class="feature-card">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
         </div>
-        <h3>Analytics & KPIs</h3>
-        <p>Tableaux de bord personnalisables, analyses de consommation carburant, ROI flotte et benchmarks sectoriels en temps réel.</p>
+        <h3>Coupure moteur à distance</h3>
+        <p>En option : contrôlez le démarrage du moteur à distance via l'application. Immobilisez instantanément un véhicule volé ou utilisé sans autorisation.</p>
+        <span class="feature-tag">Option +10 000 FCFA</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h3>Alertes & Reporting</h3>
+        <p>Notifications instantanées pour excès de vitesse, sorties de zone, démarrages non autorisés. Rapports détaillés et personnalisés sur l'activité de votre flotte.</p>
+        <span class="feature-tag">Rapports personnalisés</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3>Application mobile gratuite</h3>
+        <p>Accédez à votre tableau de bord Alphatrack depuis votre smartphone, où que vous soyez. Interface intuitive, disponible 24h/24 et 7j/7.</p>
+        <span class="feature-tag">Inclus dans l'abonnement</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F04E00" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Hébergement & Maintenance</h3>
+        <p>Vos données sont hébergées en sécurité et maintenues par nos équipes. Support local disponible et SAV réactif avec remplacement rapide en cas de défaut.</p>
+        <span class="feature-tag">Support WhatsApp</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Tarification</div>
+      <h2 class="section-title">Des tarifs clairs, sans mauvaise surprise</h2>
+      <p class="section-sub">Installation gratuite, 1 an d'abonnement offert à l'achat. Tout est inclus pour démarrer immédiatement.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Achat & Installation -->
+      <div>
+        <div class="pricing-box">
+          <div class="pricing-box-header">
+            <h3>Achat & Installation</h3>
+            <p>Équipement du véhicule — paiement unique</p>
+          </div>
+          <div class="pricing-box-body">
+            <div class="pricing-line">
+              <div class="pricing-line-label">
+                Tracker GPS
+                <small>Suivi temps réel · Application mobile · Alerting · Géofencing</small>
+              </div>
+              <div class="pricing-line-price">40 000 – 50 000 FCFA</div>
+            </div>
+            <div class="pricing-line">
+              <div class="pricing-line-label">
+                Relais de coupure moteur
+                <small>Contrôle moteur à distance · Anti-vol</small>
+              </div>
+              <div class="pricing-line-price option">+ 10 000 FCFA <span style="font-weight:400;color:var(--gray-400)">(option)</span></div>
+            </div>
+            <div class="pricing-line">
+              <div class="pricing-line-label">
+                Installation & configuration
+                <small>Pose professionnelle par nos techniciens</small>
+              </div>
+              <div class="pricing-line-price free">Gratuit</div>
+            </div>
+            <div class="pricing-line">
+              <div class="pricing-line-label">
+                Supplément mobilités lourdes
+                <small>Camions, poids lourds, engins de chantier</small>
+              </div>
+              <div class="pricing-line-price option">+ 10 000 FCFA</div>
+            </div>
+            <div class="pricing-promo">
+              <div class="pricing-promo-dot"></div>
+              <div class="pricing-promo-text">
+                <strong>Offre de lancement :</strong> 1 an d'abonnement Premium offert à l'achat et l'installation (valeur 120 000 FCFA). Renouvelable à 100 000 FCFA/an.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="garanties">
+          <h3>Garanties & Support</h3>
+          <div class="garantie-list">
+            <div class="garantie-item">
+              <div class="garantie-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <strong>Garantie matériel 1 an</strong>
+                <span>Hors mauvaise manipulation — Remplacement rapide en cas de défaut matériel</span>
+              </div>
+            </div>
+            <div class="garantie-item">
+              <div class="garantie-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37A16 16 0 0 0 16 16.46l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <strong>Support WhatsApp</strong>
+                <span>Assistance technique durant les heures ouvrables</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Abonnement -->
+      <div>
+        <div class="abonnement-card">
+          <div class="abonnement-inner">
+            <div class="abonnement-badge">Formule Premium</div>
+            <div class="abonnement-price">
+              <div class="abonnement-price-main"><sup>FCFA </sup>10 000<sub>/mois · /véhicule</sub></div>
+              <div class="abonnement-price-note">Abonnement mensuel sans engagement long terme</div>
+            </div>
+            <ul class="abonnement-features">
+              <li>Gestion de flotte complète</li>
+              <li>Support local & SAV prioritaire</li>
+              <li>Reporting & Alertes personnalisés</li>
+              <li>Hébergement sécurisé des données</li>
+              <li>Maintenance plateforme incluse</li>
+              <li>Application mobile gratuite</li>
+            </ul>
+            <div class="abonnement-annuel">
+              <div>
+                <div class="abonnement-annuel-label">Renouvellement annuel</div>
+              </div>
+              <div>
+                <span class="abonnement-annuel-old">120 000</span>
+                <span class="abonnement-annuel-price">100 000 FCFA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem;background:var(--orange-pale);border:1px solid rgba(240,78,0,0.2);border-radius:var(--radius-lg);padding:1.5rem 2rem;">
+          <div style="font-size:13px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem;">Particuliers & Entreprises</div>
+          <p style="font-size:14px;color:var(--gray-600);line-height:1.6;">Alphatrack s'adresse aussi bien aux particuliers souhaitant sécuriser leur véhicule personnel qu'aux entreprises gérant des flottes de tout gabarit — véhicules légers, camions, engins de chantier ou véhicules de transport de marchandises.</p>
+          <div style="margin-top:1rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <span style="background:white;border:1px solid var(--gray-200);border-radius:100px;padding:4px 12px;font-size:12px;font-weight:600;color:var(--navy)">Véhicules légers</span>
+            <span style="background:white;border:1px solid var(--gray-200);border-radius:100px;padding:4px 12px;font-size:12px;font-weight:600;color:var(--navy)">Poids lourds</span>
+            <span style="background:white;border:1px solid var(--gray-200);border-radius:100px;padding:4px 12px;font-size:12px;font-weight:600;color:var(--navy)">Engins de chantier</span>
+            <span style="background:white;border:1px solid var(--gray-200);border-radius:100px;padding:4px 12px;font-size:12px;font-weight:600;color:var(--navy)">Transport de marchandises</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -491,286 +924,111 @@
     <div class="section-header">
       <div class="section-label">Cas d'usage</div>
       <h2 class="section-title">Adaptée à chaque secteur</h2>
-      <p class="section-sub">Alphatrack couvre les besoins spécifiques de chaque industrie, du transport logistique aux services publics.</p>
+      <p class="section-sub">Alphatrack répond aux besoins concrets des organisations qui ne peuvent pas se permettre l'incertitude sur leur flotte.</p>
     </div>
-
     <div class="uc-tabs">
-      <button class="uc-tab active" onclick="showTab('transport')">Transport & Logistique</button>
-      <button class="uc-tab" onclick="showTab('securite')">Sécurité & Surveillance</button>
-      <button class="uc-tab" onclick="showTab('public')">Services Publics</button>
-      <button class="uc-tab" onclick="showTab('energie')">Énergie & Mines</button>
+      <button class="uc-tab active" onclick="showTab('transport',this)">Transport & Logistique</button>
+      <button class="uc-tab" onclick="showTab('securite',this)">Sécurité Anti-vol</button>
+      <button class="uc-tab" onclick="showTab('public',this)">Services Publics</button>
+      <button class="uc-tab" onclick="showTab('entreprise',this)">Entreprises & PME</button>
     </div>
 
     <div class="uc-panel active" id="tab-transport">
       <div class="uc-items">
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          </div>
-          <div>
-            <h4>Optimisation des tournées</h4>
-            <p>Calcul dynamique des itinéraires selon les contraintes de livraison, trafic et disponibilité des conducteurs.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <div><h4>Optimisation des tournées</h4><p>Suivez en temps réel vos livreurs, confirmez les livraisons géolocalisées et réduisez les kilomètres à vide.</p></div>
         </div>
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <div>
-            <h4>Prévention des fraudes carburant</h4>
-            <p>Détection d'anomalies de consommation, alertes siphonnage et rapports de contrôle aux stations.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div><h4>Contrôle des conducteurs</h4><p>Alertes vitesse excessive, détection des comportements à risque, rapports par conducteur pour améliorer la sécurité.</p></div>
         </div>
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          </div>
-          <div>
-            <h4>Preuve de livraison digitale</h4>
-            <p>Confirmation géolocalisée des livraisons avec horodatage, photo et signature électronique du destinataire.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div><h4>Prévention des fraudes carburant</h4><p>Détectez les anomalies de consommation, contrôlez les pleins et réduisez significativement vos coûts d'exploitation.</p></div>
         </div>
       </div>
       <div class="uc-visual">
-        <div class="uc-visual-label">Performance flotte — Ce mois</div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Ponctualité</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:94%"></div></div>
-          <span class="uc-bar-val">94%</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Conso optimisée</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill" style="width:78%"></div></div>
-          <span class="uc-bar-val">−22%</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Score conducteur</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:88%"></div></div>
-          <span class="uc-bar-val">88/100</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Fraudes détectées</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill" style="width:100%"></div></div>
-          <span class="uc-bar-val">12</span>
-        </div>
+        <div class="uc-visual-label">Gains constatés — Flotte logistique</div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Coûts carburant</span><div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:76%"></div></div><span class="uc-bar-val">−24%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Ponctualité</span><div class="uc-bar-track"><div class="uc-bar-fill" style="width:92%"></div></div><span class="uc-bar-val">+18%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Km inutiles</span><div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:68%"></div></div><span class="uc-bar-val">−32%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Satisfaction client</span><div class="uc-bar-track"><div class="uc-bar-fill" style="width:88%"></div></div><span class="uc-bar-val">+22%</span></div>
       </div>
     </div>
 
     <div class="uc-panel" id="tab-securite">
       <div class="uc-items">
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div>
-            <h4>Détection de vol et intrusion</h4>
-            <p>Alertes immédiates en cas de démarrage non autorisé, mouvement hors horaires ou sortie de zone sécurisée.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><h4>Détection de vol</h4><p>Alerte immédiate en cas de démarrage non autorisé ou de sortie de zone. Coupure moteur à distance pour immobiliser le véhicule volé.</p></div>
         </div>
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <div>
-            <h4>Bouton de panique conducteur</h4>
-            <p>Déclenchement SOS avec localisation exacte, escalade automatique aux équipes de sécurité et forces de l'ordre.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>Localisation après incident</h4><p>Retrouvez instantanément la position exacte de tout véhicule signalé volé ou impliqué dans un incident, et transmettez-la aux autorités.</p></div>
         </div>
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <div>
-            <h4>Surveillance périmétrique</h4>
-            <p>Geofencing multi-zones avec niveaux d'alerte différenciés — avertissement, blocage ou intervention selon la criticité.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div><h4>Surveillance périmétrique</h4><p>Créez des zones géofencées autour de vos dépôts et parkings. Toute intrusion ou sortie est signalée en temps réel sur votre téléphone.</p></div>
         </div>
       </div>
       <div class="uc-visual">
-        <div class="uc-visual-label">Incidents — 30 derniers jours</div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Vols évités</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:85%"></div></div>
-          <span class="uc-bar-val">17</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Alertes SOS</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill" style="width:20%"></div></div>
-          <span class="uc-bar-val">4</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Sorties de zone</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:60%"></div></div>
-          <span class="uc-bar-val">12</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Taux résolution</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill" style="width:98%"></div></div>
-          <span class="uc-bar-val">98%</span>
-        </div>
+        <div class="uc-visual-label">Sécurité véhicules — Indicateurs</div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Vols récupérés</span><div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:90%"></div></div><span class="uc-bar-val">90%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Délai alerte</span><div class="uc-bar-track"><div class="uc-bar-fill" style="width:98%"></div></div><span class="uc-bar-val">&lt; 30s</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Fausses alertes</span><div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:5%"></div></div><span class="uc-bar-val">&lt; 5%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Couverture réseau</span><div class="uc-bar-track"><div class="uc-bar-fill" style="width:98%"></div></div><span class="uc-bar-val">98%</span></div>
       </div>
     </div>
 
     <div class="uc-panel" id="tab-public">
       <div class="uc-items">
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div>
-            <h4>Flotte municipale & collectivités</h4>
-            <p>Suivi des véhicules de collecte, maintenance prédictive, rapports de conformité et optimisation des tournées.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div><h4>Flottes municipales</h4><p>Suivi des véhicules de collecte, maintenance prédictive et optimisation des tournées pour les collectivités.</p></div>
         </div>
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-          </div>
-          <div>
-            <h4>Urgences & secours</h4>
-            <p>Dispatch en temps réel des ambulances et véhicules d'intervention, corridors verts automatiques et reporting d'incident.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+          <div><h4>Véhicules d'urgence</h4><p>Dispatch et coordination en temps réel des ambulances, véhicules d'intervention et de secours.</p></div>
         </div>
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <h4>Transports scolaires</h4>
-            <p>Suivi des trajets, alertes parents à l'embarquement et débarquement, contrôle des arrêts et respect des horaires.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div><h4>Transports scolaires</h4><p>Suivi des trajets en temps réel, alertes aux parents à l'embarquement et débarquement, respect des itinéraires.</p></div>
         </div>
       </div>
       <div class="uc-visual">
         <div class="uc-visual-label">Efficacité opérationnelle</div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Coûts réduits</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:72%"></div></div>
-          <span class="uc-bar-val">−28%</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Disponibilité</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill" style="width:96%"></div></div>
-          <span class="uc-bar-val">96%</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Satisfaction usagers</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:91%"></div></div>
-          <span class="uc-bar-val">91%</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Incidents signalés</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill" style="width:30%"></div></div>
-          <span class="uc-bar-val">6</span>
-        </div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Coûts réduits</span><div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:72%"></div></div><span class="uc-bar-val">−28%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Disponibilité</span><div class="uc-bar-track"><div class="uc-bar-fill" style="width:96%"></div></div><span class="uc-bar-val">96%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Ponctualité</span><div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:91%"></div></div><span class="uc-bar-val">+15%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Incidents signalés</span><div class="uc-bar-track"><div class="uc-bar-fill" style="width:30%"></div></div><span class="uc-bar-val">−60%</span></div>
       </div>
     </div>
 
-    <div class="uc-panel" id="tab-energie">
+    <div class="uc-panel" id="tab-entreprise">
       <div class="uc-items">
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <div>
-            <h4>Sites pétroliers & miniers</h4>
-            <p>Suivi des engins lourds, contrôle d'accès aux zones restreintes, rapports HSE automatisés et alertes de danger.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div><h4>Gestion parc véhicules entreprise</h4><p>Contrôlez les usages professionnels vs personnels, les heures d'utilisation et les déplacements de vos collaborateurs.</p></div>
         </div>
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37A16 16 0 0 0 16 16.46l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div>
-            <h4>Maintenance prédictive</h4>
-            <p>Diagnostics OBD en temps réel, alertes de panne préventives et planification automatique des interventions.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><h4>BTP & Engins de chantier</h4><p>Suivi des machines sur chantier, alertes de sortie de périmètre, contrôle des heures de marche et maintenance préventive.</p></div>
         </div>
         <div class="uc-item">
-          <div class="uc-item-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <div>
-            <h4>Reporting ESG & carbone</h4>
-            <p>Calcul des émissions CO₂ par véhicule, rapports environnementaux et tableaux de bord de transition énergétique.</p>
-          </div>
+          <div class="uc-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div><h4>Tableaux de bord & Reporting</h4><p>Rapports d'activité automatiques, exports pour comptabilité, suivi des KPIs flotte et analyses de rentabilité.</p></div>
         </div>
       </div>
       <div class="uc-visual">
-        <div class="uc-visual-label">Environnement & sécurité</div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">CO₂ réduit</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:65%"></div></div>
-          <span class="uc-bar-val">−31%</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Pannes évitées</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill" style="width:80%"></div></div>
-          <span class="uc-bar-val">80%</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Accès non autorisés</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:100%"></div></div>
-          <span class="uc-bar-val">0</span>
-        </div>
-        <div class="uc-bar-row">
-          <span class="uc-bar-label">Score HSE</span>
-          <div class="uc-bar-track"><div class="uc-bar-fill" style="width:92%"></div></div>
-          <span class="uc-bar-val">92/100</span>
-        </div>
+        <div class="uc-visual-label">ROI moyen entreprises équipées</div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Carburant</span><div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:80%"></div></div><span class="uc-bar-val">−20%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Maintenance</span><div class="uc-bar-track"><div class="uc-bar-fill" style="width:65%"></div></div><span class="uc-bar-val">−25%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Productivité</span><div class="uc-bar-track"><div class="uc-bar-fill orange" style="width:75%"></div></div><span class="uc-bar-val">+18%</span></div>
+        <div class="uc-bar-row"><span class="uc-bar-label">Retour sur invest.</span><div class="uc-bar-track"><div class="uc-bar-fill" style="width:88%"></div></div><span class="uc-bar-val">&lt; 6 mois</span></div>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="testimonials">
-  <div class="container">
-    <div class="section-header center">
-      <div class="section-label">Témoignages</div>
-      <h2 class="section-title">Ils font confiance à Alphatrack</h2>
-      <p class="section-sub">Des équipes opérationnelles et des décideurs qui ont transformé leur gestion de flotte.</p>
-    </div>
-    <div class="testi-grid">
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« Alphatrack nous a permis de réduire nos coûts carburant de 26% en trois mois. La visibilité en temps réel sur nos 80 véhicules a complètement changé notre organisation. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar">KD</div>
-          <div>
-            <div class="testi-name">Kofi Danquah</div>
-            <div class="testi-role">Directeur Logistique — TransAfrique</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« La fonctionnalité cybersécurité OBD est exceptionnelle. Nous avons détecté une tentative d'intrusion sur l'électronique d'un véhicule — quelque chose qu'aucune autre solution ne nous aurait signalé. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar">AC</div>
-          <div>
-            <div class="testi-name">Amara Coulibaly</div>
-            <div class="testi-role">RSSI — Groupe Mines Ouest</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« L'interface est claire, le déploiement a été rapide et le support d'Alpha Systems est réactif. Nos équipes ont été formées en une journée. C'est exactement ce dont nous avions besoin. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar">FB</div>
-          <div>
-            <div class="testi-name">Fatou Badiane</div>
-            <div class="testi-role">DSI — Dakar Mobilité Publique</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
   </div>
 </section>
 
@@ -780,28 +1038,28 @@
     <div class="about-grid">
       <div>
         <div class="section-label">À propos</div>
-        <h2 class="section-title">Alpha Systems,<br/>l'innovation au service de la mobilité</h2>
-        <p class="section-sub" style="margin-bottom:0">Fondée avec la vision de sécuriser et d'optimiser la mobilité des organisations africaines et internationales, Alpha Systems développe des solutions technologiques adaptées aux réalités du terrain.</p>
+        <h2 class="section-title">Alpha Systems,<br/>votre sécurité partout,<br/>tout le temps.</h2>
+        <p class="section-sub" style="margin-bottom:0">Chez Alpha Systems, nous combinons innovation technologique et expertise locale pour offrir des solutions fiables de suivi, de surveillance et de protection.</p>
         <div class="about-values">
           <div class="about-value">
             <div class="about-value-num">01</div>
             <div>
-              <h4>Expertise locale, standards internationaux</h4>
-              <p>Nos équipes connaissent les défis opérationnels des marchés émergents et intègrent les meilleures pratiques technologiques mondiales.</p>
+              <h4>Notre vision</h4>
+              <p>Offrir aux particuliers et aux entreprises des solutions fiables et innovantes de géolocalisation, vidéosurveillance et sécurité physique, afin de protéger efficacement leurs biens et optimiser leurs opérations.</p>
             </div>
           </div>
           <div class="about-value">
             <div class="about-value-num">02</div>
             <div>
-              <h4>Sécurité by design</h4>
-              <p>Chaque fonctionnalité Alphatrack est conçue avec la sécurité comme priorité absolue — des données au véhicule.</p>
+              <h4>Expertise locale</h4>
+              <p>Basés à Abidjan, nos techniciens connaissent les réalités du terrain. Nous intervenons rapidement et adaptons nos solutions aux contraintes locales.</p>
             </div>
           </div>
           <div class="about-value">
             <div class="about-value-num">03</div>
             <div>
-              <h4>Partenariat à long terme</h4>
-              <p>Nous accompagnons nos clients bien au-delà du déploiement, avec un support dédié et des mises à jour continues.</p>
+              <h4>Engagement client</h4>
+              <p>Support WhatsApp dédié, garantie matériel, et accompagnement à chaque étape — de l'installation à la maîtrise quotidienne de la solution.</p>
             </div>
           </div>
         </div>
@@ -809,31 +1067,25 @@
       <div class="about-visual">
         <div class="about-visual-bg"></div>
         <div class="about-visual-content">
-          <div class="about-logo-big">
-            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="52" height="52" rx="10" fill="#F04E00"/>
-              <polygon points="26,7 44,42 8,42" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/>
-              <polygon points="26,19 35,33 17,33" fill="white"/>
-            </svg>
-          </div>
-          <div class="about-tagline">Votre flotte,<br/><span>sous contrôle total.</span></div>
-          <div class="about-desc">Alphatrack est la solution phare d'Alpha Systems — une plateforme enterprise pensée pour les organisations qui ne peuvent pas se permettre l'incertitude sur leur flotte de véhicules.</div>
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><rect width="52" height="52" rx="10" fill="#F04E00"/><polygon points="26,7 44,42 8,42" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/><polygon points="26,19 35,33 17,33" fill="white"/></svg>
+          <div class="about-tagline">Votre tranquillité d'esprit<br/>est <span>notre mission.</span></div>
+          <div class="about-desc">Alpha Systems développe des solutions de géolocalisation et sécurité adaptées aux marchés africains — avec les standards technologiques les plus exigeants, et un service de proximité qui fait la différence.</div>
           <div class="about-numbers">
             <div class="about-num">
-              <div class="about-num-val">80<span>+</span></div>
-              <div class="about-num-lbl">Cas d'usage couverts</div>
-            </div>
-            <div class="about-num">
-              <div class="about-num-val">10<span>+</span></div>
-              <div class="about-num-lbl">Secteurs d'activité</div>
-            </div>
-            <div class="about-num">
               <div class="about-num-val">24<span>/7</span></div>
-              <div class="about-num-lbl">Support & monitoring</div>
+              <div class="about-num-lbl">Monitoring actif</div>
             </div>
             <div class="about-num">
-              <div class="about-num-val">99<span>.9%</span></div>
-              <div class="about-num-lbl">Uptime garanti</div>
+              <div class="about-num-val">1<span> an</span></div>
+              <div class="about-num-lbl">Garantie matériel</div>
+            </div>
+            <div class="about-num">
+              <div class="about-num-val">100<span>%</span></div>
+              <div class="about-num-lbl">Local & réactif</div>
+            </div>
+            <div class="about-num">
+              <div class="about-num-val">0<span> FCFA</span></div>
+              <div class="about-num-lbl">Installation gratuite</div>
             </div>
           </div>
         </div>
@@ -848,87 +1100,91 @@
     <div class="contact-grid">
       <div class="contact-info">
         <div class="section-label">Contact</div>
-        <h2 class="section-title">Prêt à transformer votre flotte ?</h2>
-        <p>Contactez notre équipe pour une démonstration personnalisée d'Alphatrack. Nous adaptons notre présentation à vos enjeux spécifiques et votre secteur d'activité.</p>
+        <h2 class="section-title">Parlons de votre projet</h2>
+        <p>Contactez notre équipe pour un devis personnalisé, une démonstration d'Alphatrack ou toute question sur nos solutions de géolocalisation. Réponse garantie sous 24h.</p>
         <div class="contact-points">
           <div class="contact-point">
             <div class="contact-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37A16 16 0 0 0 16 16.46l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37A16 16 0 0 0 16 16.46l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </div>
             <div>
-              <strong>Téléphone</strong>
-              <span>+225 XX XX XX XX XX</span>
+              <strong>WhatsApp & Téléphone</strong>
+              <a href="tel:+22501015498 95" style="display:block;color:var(--gray-600);text-decoration:none">+225 01 01 54 98 95</a>
+              <a href="tel:+22507498168 48" style="display:block;color:var(--gray-600);text-decoration:none">+225 07 49 81 68 48</a>
+              <a href="tel:+22507799645 29" style="display:block;color:var(--gray-600);text-decoration:none">+225 07 79 96 45 29</a>
             </div>
           </div>
           <div class="contact-point">
             <div class="contact-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
             <div>
               <strong>Email</strong>
-              <span>contact@alphasystems.africa</span>
+              <a href="mailto:bcy.alphasystems@outlook.com">bcy.alphasystems@outlook.com</a>
             </div>
           </div>
           <div class="contact-point">
             <div class="contact-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div>
-              <strong>Siège</strong>
+              <strong>Siège social</strong>
               <span>Abidjan, Côte d'Ivoire</span>
+              <span style="font-size:12px;color:var(--gray-400);margin-top:2px">Heures ouvrables · Support WhatsApp</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="contact-form">
-        <h3>Demander une démonstration</h3>
+        <h3>Demander un devis gratuit</h3>
         <div class="form-row">
           <div class="form-group">
             <label>Prénom</label>
-            <input type="text" placeholder="Jean" />
+            <input id="f-prenom" type="text" placeholder="Jean" />
           </div>
           <div class="form-group">
             <label>Nom</label>
-            <input type="text" placeholder="Dupont" />
+            <input id="f-nom" type="text" placeholder="Dupont" />
           </div>
         </div>
         <div class="form-group">
-          <label>Email professionnel</label>
-          <input type="email" placeholder="j.dupont@entreprise.com" />
+          <label>Téléphone / WhatsApp</label>
+          <input id="f-tel" type="tel" placeholder="+225 XX XX XX XX XX" />
         </div>
         <div class="form-group">
-          <label>Entreprise</label>
-          <input type="text" placeholder="Nom de votre organisation" />
+          <label>Email</label>
+          <input id="f-email" type="email" placeholder="votre@email.com" />
         </div>
         <div class="form-group">
-          <label>Secteur d'activité</label>
-          <select>
-            <option value="">Sélectionner un secteur</option>
-            <option>Transport & Logistique</option>
-            <option>Sécurité & Surveillance</option>
-            <option>Services Publics</option>
-            <option>Énergie & Mines</option>
-            <option>Santé</option>
-            <option>Autre</option>
+          <label>Vous êtes</label>
+          <select id="f-profil">
+            <option value="">Sélectionner</option>
+            <option>Particulier</option>
+            <option>Entreprise / PME</option>
+            <option>Collectivité publique</option>
+            <option>ONG / Organisation</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Taille de flotte estimée</label>
-          <select>
+          <label>Nombre de véhicules à équiper</label>
+          <select id="f-vehicules">
             <option value="">Nombre de véhicules</option>
-            <option>1 — 10 véhicules</option>
-            <option>11 — 50 véhicules</option>
-            <option>51 — 200 véhicules</option>
-            <option>200+ véhicules</option>
+            <option>1 véhicule</option>
+            <option>2 – 5 véhicules</option>
+            <option>6 – 20 véhicules</option>
+            <option>21 – 50 véhicules</option>
+            <option>50+ véhicules</option>
           </select>
         </div>
         <div class="form-group">
           <label>Message (optionnel)</label>
-          <textarea placeholder="Décrivez brièvement vos besoins ou contraintes spécifiques..."></textarea>
+          <textarea id="f-message" placeholder="Type de véhicules, besoins spécifiques, questions sur les tarifs..."></textarea>
         </div>
-        <button type="button" class="form-submit" onclick="handleSubmit(this)">Envoyer ma demande →</button>
-        <p class="form-notice">Réponse garantie sous 24h ouvrées · Aucun engagement</p>
+        <!-- État erreur -->
+        <div id="form-error" style="display:none;background:#FEE2E2;border:1px solid #FCA5A5;border-radius:8px;padding:10px 14px;font-size:13px;color:#B91C1C;margin-bottom:1rem"></div>
+        <button type="button" id="form-btn" class="form-submit" onclick="handleSubmit()">Envoyer ma demande →</button>
+        <p class="form-notice">Réponse sous 24h · Devis gratuit et sans engagement · Installation gratuite incluse</p>
       </div>
     </div>
   </div>
@@ -939,73 +1195,171 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#" class="nav-logo" style="margin-bottom:0">
+        <a href="#" class="nav-logo">
           <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="6" fill="#F04E00"/><polygon points="18,5 30,28 6,28" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><polygon points="18,13 24,22 12,22" fill="white"/></svg>
           <div class="nav-brand">
             <span class="nav-brand-main">Alphatrack</span>
             <span class="nav-brand-sub">by Alpha Systems</span>
           </div>
         </a>
-        <p>La solution de fleet tracking enterprise qui sécurise, optimise et digitalise la gestion de votre flotte de véhicules.</p>
+        <p>Solutions fiables de géolocalisation, surveillance et sécurité pour particuliers et entreprises. Basés à Abidjan, Côte d'Ivoire.</p>
+        <p class="footer-rcm">RCMM : CI-ABJ-03-2025-B12-05714</p>
       </div>
       <div class="footer-col">
         <h4>Produit</h4>
         <ul>
           <li><a href="#features">Fonctionnalités</a></li>
+          <li><a href="#pricing">Tarifs</a></li>
           <li><a href="#usecases">Cas d'usage</a></li>
-          <li><a href="#">Tarifs</a></li>
-          <li><a href="#">Documentation</a></li>
+          <li><a href="#contact">Demander un devis</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Secteurs</h4>
         <ul>
           <li><a href="#">Transport & Logistique</a></li>
-          <li><a href="#">Sécurité</a></li>
+          <li><a href="#">Sécurité Anti-vol</a></li>
           <li><a href="#">Services Publics</a></li>
-          <li><a href="#">Énergie & Mines</a></li>
+          <li><a href="#">Entreprises & BTP</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Entreprise</h4>
+        <h4>Contact</h4>
         <ul>
-          <li><a href="#about">À propos</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#">Mentions légales</a></li>
-          <li><a href="#">Politique de confidentialité</a></li>
+          <li><a href="tel:+22501015498 95">+225 01 01 54 98 95</a></li>
+          <li><a href="tel:+22507498168 48">+225 07 49 81 68 48</a></li>
+          <li><a href="tel:+22507799645 29">+225 07 79 96 45 29</a></li>
+          <li><a href="mailto:bcy.alphasystems@outlook.com">bcy.alphasystems@outlook.com</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2025 Alpha Systems. Tous droits réservés.</p>
-      <p style="color:rgba(255,255,255,0.2)">Alphatrack — Fleet Tracking Enterprise</p>
+      <p style="color:rgba(255,255,255,0.2)">Alphatrack — GPS & Gestion de Flotte</p>
     </div>
   </div>
 </footer>
 
+<!-- Firebase SDK (compat v9) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
 <script>
-  function showTab(id) {
+  /* ═══════════════════════════════════════════════════════
+     FIREBASE CONFIGURATION
+     Remplacez les valeurs ci-dessous par celles de votre
+     projet Firebase (Console → Paramètres du projet → SDK)
+     ═══════════════════════════════════════════════════════ */
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  
+const firebaseConfig = {
+    apiKey: "AIzaSyBJ95ILyLz5DGvPTZBCULCC3fuBXuYb-Co",
+    authDomain: "alphasystems-b77f6.firebaseapp.com",
+    projectId: "alphasystems-b77f6",
+    storageBucket: "alphasystems-b77f6.firebasestorage.app",
+    messagingSenderId: "210006445051",
+    appId: "1:210006445051:web:0a7d99e0be3375975d595e",
+    measurementId: "G-TTBZG37GTP"
+  };
+
+  // Initialisation Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  /* ═══════════════════════════════════════════════════════
+     SOUMISSION DU FORMULAIRE → Firestore
+     Collection : "demandes"
+     ═══════════════════════════════════════════════════════ */
+  async function handleSubmit() {
+    const btn      = document.getElementById('form-btn');
+    const errBox   = document.getElementById('form-error');
+
+    // Lecture des champs
+    const prenom   = document.getElementById('f-prenom').value.trim();
+    const nom      = document.getElementById('f-nom').value.trim();
+    const tel      = document.getElementById('f-tel').value.trim();
+    const email    = document.getElementById('f-email').value.trim();
+    const profil   = document.getElementById('f-profil').value;
+    const vehicules= document.getElementById('f-vehicules').value;
+    const message  = document.getElementById('f-message').value.trim();
+
+    // Validation minimale
+    errBox.style.display = 'none';
+    if (!prenom || !nom) {
+      errBox.textContent = 'Veuillez indiquer votre prénom et nom.';
+      errBox.style.display = 'block'; return;
+    }
+    if (!tel && !email) {
+      errBox.textContent = 'Veuillez fournir au moins un moyen de contact (téléphone ou email).';
+      errBox.style.display = 'block'; return;
+    }
+
+    // État chargement
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours…';
+
+    try {
+      // Enregistrement dans Firestore
+      await db.collection('demandes').add({
+        prenom,
+        nom,
+        tel,
+        email,
+        profil,
+        vehicules,
+        message,
+        statut:   'nouveau',
+        source:   'site_web',
+        date:     firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      // Succès
+      btn.textContent = '✓ Demande envoyée — nous vous recontactons sous 24h';
+      btn.style.background = '#16A34A';
+
+      // Reset silencieux des champs
+      ['f-prenom','f-nom','f-tel','f-email','f-message'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('f-profil').selectedIndex = 0;
+      document.getElementById('f-vehicules').selectedIndex = 0;
+
+    } catch (err) {
+      console.error('Firestore error:', err);
+      btn.disabled = false;
+      btn.textContent = 'Envoyer ma demande →';
+      errBox.textContent = 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement par WhatsApp.';
+      errBox.style.display = 'block';
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     ONGLETS CAS D'USAGE
+     ═══════════════════════════════════════════════════════ */
+  function showTab(id, btn) {
     document.querySelectorAll('.uc-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.uc-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
-    event.target.classList.add('active');
+    btn.classList.add('active');
   }
 
-  function handleSubmit(btn) {
-    btn.textContent = '✓ Demande envoyée !';
-    btn.style.background = '#22C55E';
-    btn.disabled = true;
-  }
-
-  // Smooth nav highlight
+  /* ═══════════════════════════════════════════════════════
+     NAVIGATION ACTIVE AU SCROLL
+     ═══════════════════════════════════════════════════════ */
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(s => {
       if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
     });
-    navLinks.forEach(a => {
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
       a.style.color = a.getAttribute('href') === '#' + current ? 'white' : '';
     });
   });
