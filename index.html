@@ -1240,58 +1240,39 @@
   </div>
 </footer>
 
-<!-- Firebase SDK (compat v9) -->
+<!-- ── SDK Firebase compat (pas d'import, fonctionne partout) ── -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
-  /* ═══════════════════════════════════════════════════════
-     FIREBASE CONFIGURATION
-     Remplacez les valeurs ci-dessous par celles de votre
-     projet Firebase (Console → Paramètres du projet → SDK)
-     ═══════════════════════════════════════════════════════ */
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  
-const firebaseConfig = {
-    apiKey: "AIzaSyBJ95ILyLz5DGvPTZBCULCC3fuBXuYb-Co",
-    authDomain: "alphasystems-b77f6.firebaseapp.com",
-    projectId: "alphasystems-b77f6",
-    storageBucket: "alphasystems-b77f6.firebasestorage.app",
+  /* ── Config Firebase ── */
+  const firebaseConfig = {
+    apiKey:            "AIzaSyBJ95ILyLz5DGvPTZBCULCC3fuBXuYb-Co",
+    authDomain:        "alphasystems-b77f6.firebaseapp.com",
+    projectId:         "alphasystems-b77f6",
+    storageBucket:     "alphasystems-b77f6.firebasestorage.app",
     messagingSenderId: "210006445051",
-    appId: "1:210006445051:web:0a7d99e0be3375975d595e",
-    measurementId: "G-TTBZG37GTP"
+    appId:             "1:210006445051:web:0a7d99e0be3375975d595e",
+    measurementId:     "G-TTBZG37GTP"
   };
 
-  // Initialisation Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  /* ═══════════════════════════════════════════════════════
-     SOUMISSION DU FORMULAIRE → Firestore
-     Collection : "demandes"
-     ═══════════════════════════════════════════════════════ */
+  /* ── Formulaire → Firestore ── */
   async function handleSubmit() {
-    const btn      = document.getElementById('form-btn');
-    const errBox   = document.getElementById('form-error');
-
-    // Lecture des champs
-    const prenom   = document.getElementById('f-prenom').value.trim();
-    const nom      = document.getElementById('f-nom').value.trim();
-    const tel      = document.getElementById('f-tel').value.trim();
-    const email    = document.getElementById('f-email').value.trim();
-    const profil   = document.getElementById('f-profil').value;
-    const vehicules= document.getElementById('f-vehicules').value;
-    const message  = document.getElementById('f-message').value.trim();
-
-    // Validation minimale
+    const btn    = document.getElementById('form-btn');
+    const errBox = document.getElementById('form-error');
     errBox.style.display = 'none';
+
+    const prenom    = document.getElementById('f-prenom').value.trim();
+    const nom       = document.getElementById('f-nom').value.trim();
+    const tel       = document.getElementById('f-tel').value.trim();
+    const email     = document.getElementById('f-email').value.trim();
+    const profil    = document.getElementById('f-profil').value;
+    const vehicules = document.getElementById('f-vehicules').value;
+    const message   = document.getElementById('f-message').value.trim();
+
     if (!prenom || !nom) {
       errBox.textContent = 'Veuillez indiquer votre prénom et nom.';
       errBox.style.display = 'block'; return;
@@ -1301,30 +1282,20 @@ const firebaseConfig = {
       errBox.style.display = 'block'; return;
     }
 
-    // État chargement
     btn.disabled = true;
     btn.textContent = 'Envoi en cours…';
 
     try {
-      // Enregistrement dans Firestore
       await db.collection('demandes').add({
-        prenom,
-        nom,
-        tel,
-        email,
-        profil,
-        vehicules,
-        message,
-        statut:   'nouveau',
-        source:   'site_web',
-        date:     firebase.firestore.FieldValue.serverTimestamp()
+        prenom, nom, tel, email, profil, vehicules, message,
+        statut: 'nouveau',
+        source: 'site_web',
+        date:   firebase.firestore.FieldValue.serverTimestamp()
       });
 
-      // Succès
       btn.textContent = '✓ Demande envoyée — nous vous recontactons sous 24h';
       btn.style.background = '#16A34A';
 
-      // Reset silencieux des champs
       ['f-prenom','f-nom','f-tel','f-email','f-message'].forEach(id => {
         document.getElementById(id).value = '';
       });
@@ -1335,14 +1306,12 @@ const firebaseConfig = {
       console.error('Firestore error:', err);
       btn.disabled = false;
       btn.textContent = 'Envoyer ma demande →';
-      errBox.textContent = 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement par WhatsApp.';
+      errBox.textContent = 'Erreur d\'envoi. Contactez-nous directement par WhatsApp.';
       errBox.style.display = 'block';
     }
   }
 
-  /* ═══════════════════════════════════════════════════════
-     ONGLETS CAS D'USAGE
-     ═══════════════════════════════════════════════════════ */
+  /* ── Onglets cas d'usage ── */
   function showTab(id, btn) {
     document.querySelectorAll('.uc-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.uc-tab').forEach(t => t.classList.remove('active'));
@@ -1350,9 +1319,7 @@ const firebaseConfig = {
     btn.classList.add('active');
   }
 
-  /* ═══════════════════════════════════════════════════════
-     NAVIGATION ACTIVE AU SCROLL
-     ═══════════════════════════════════════════════════════ */
+  /* ── Nav active au scroll ── */
   const sections = document.querySelectorAll('section[id]');
   window.addEventListener('scroll', () => {
     let current = '';
